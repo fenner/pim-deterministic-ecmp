@@ -9,19 +9,19 @@ number:
 date:
 consensus: true
 v: 3
-area: AREA
-workgroup: WG Working Group
+area: "Routing"
+workgroup: "Protocols for IP Multicast"
 keyword:
  - next generation
  - unicorn
  - sparkling distributed ledger
 venue:
-  group: WG
-  type: Working Group
-  mail: WG@example.com
-  arch: https://example.com/WG
-  github: USER/REPO
-  latest: https://example.com/LATEST
+  group: "Protocols for IP Multicast"
+  type: "Working Group"
+  mail: "pim@ietf.org"
+  arch: "https://mailarchive.ietf.org/arch/browse/pim/"
+  github: "fenner/pim-deterministic-ecmp"
+  latest: "https://fenner.github.io/pim-deterministic-ecmp/draft-fenner-pim-deterministic-ecmp.html"
 
 author:
  -
