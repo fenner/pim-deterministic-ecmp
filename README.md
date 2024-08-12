@@ -1,6 +1,6 @@
-# TODO - Your title
+# Deterministic Upstream Neighbor Selection for PIM Joins
 
-This is the working area for the individual Internet-Draft, "TODO - Your title".
+This is the working area for the individual Internet-Draft, "Deterministic Upstream Neighbor Selection for PIM Joins".
 
 * [Editor's Copy](https://fenner.github.io/pim-deterministic-ecmp/#go.draft-fenner-pim-deterministic-ecmp.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-fenner-pim-deterministic-ecmp)
