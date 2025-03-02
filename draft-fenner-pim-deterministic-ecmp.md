@@ -53,8 +53,16 @@ node (e.g., spine node) to avoid redundant traffic flows.
 
 # Introduction
 
-TODO Introduction
+In a densely interconnected network, there may be many equal-cost
+paths to a given source or RP.  RFC7761 is silent on the issue of
+how to choose among these, just indicating that RPF_interface(S)
+and RPF_interface(RP) have a single answer. If different leaf routers
+make different choices, then traffic can flow over extra paths.
 
+This document introduces two mechanisms: one for two-tier networks
+and one for arbitrary multi-tier networks, to allow routers to make the same
+decision of which neighbor to use in an ECMP scenario.  This eliminates
+undesired redundant traffic flow.
 
 # Conventions and Definitions
 
@@ -82,7 +90,7 @@ and then edited with s/-+-/---/g
 +---+---+---+---+---+---+---+---+---+---+---+---+
 ~~~~
 
-# Deterministic Selection by Router-ID
+# Deterministic Selection by Router-ID {#routerid}
 
 We use the {{RFC6395}} Hello Option to allow multiple routers to hash a given (S,G)
 join to the same RPF neighbor.  The procedure consists of two phases: first,
@@ -131,11 +139,18 @@ viaMultipathRouterId( source, group, vias )
 # Hello Option to Exchange Color
 
 We describe a Hello Option to exchange "Color"[^1], an abstract notion
-of grouping of ...
+of grouping of nodes.  For example, in a 3-tier network, the routers in
+the middle tier could be colored by the spine to which they connect in
+the top tier. In this way, the color value presented to the leaf routers
+by the middle tier is a proxy for the routers in the top tier.
+
+This Hello option should only be advertised "downwards" towards the
+lower levels of the tree.
 
 [^1]: Should we come up with a different name for this?  It has nothing to
     do with SR-TE color, for example.  However, RFC5512's definition of
     Color is just as abstract as this.
+    "MultiTier ID"?
 
 ## Color Hello Option Message Format
 
@@ -163,6 +178,9 @@ The Color will be 4 bytes long.
 Color: The color value being advertised by this router.
 
 # Deterministic Selection by Color
+
+TBD: If not all neighbors advertise color, do we pick from the subset
+that do, or we fall back to {{routerid}}?
 
 We use the above Hello Option to add an initial round of hashing,
 falling back to the algorithm in {{RouterIdPseudocode}} to break ties.
