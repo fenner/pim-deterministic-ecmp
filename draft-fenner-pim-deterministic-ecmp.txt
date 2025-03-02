@@ -5,7 +5,7 @@
 Protocols for IP Multicast                                     B. Fenner
 Internet-Draft                                                  S. Kumar
 Intended status: Informational                     Arista Networks, Inc.
-Expires: 24 February 2025                                 23 August 2024
+Expires: 3 September 2025                                   2 March 2025
 
 
         Deterministic Upstream Neighbor Selection for PIM Joins
@@ -52,11 +52,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 February 2025.
+   This Internet-Draft will expire on 3 September 2025.
 
 Copyright Notice
 
-   Copyright (c) 2024 IETF Trust and the persons identified as the
+   Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
