@@ -29,7 +29,7 @@ author:
  -
     fullname: "Bill Fenner"
     organization: Arista Networks, Inc.
-    email: "fenner@gmail.com"
+    email: "fenner@fenron.com"
  -
     fullname: "Santosh Kumar"
     organization: Arista Networks, Inc.
