@@ -1218,7 +1218,15 @@ node (e.g., spine node) to avoid redundant traffic flows.<a href="#section-abstr
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">TODO Introduction<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-1">In a densely interconnected network, there may be many equal-cost
+paths to a given source or RP.  RFC7761 is silent on the issue of
+how to choose among these, just indicating that RPF_interface(S)
+and RPF_interface(RP) have a single answer. If different leaf routers
+make different choices, then traffic can flow over extra paths.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">This document introduces two mechanisms: one for two-tier networks
+and one for arbitrary multi-tier networks, to allow routers to make the same
+decision of which neighbor to use in an ECMP scenario.  This eliminates
+undesired redundant traffic flow.<a href="#section-1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="conventions-and-definitions">
@@ -1254,7 +1262,7 @@ byte order, and performs a single hash operation across all 12 octets.<a href="#
 </div>
 </section>
 </div>
-<div id="deterministic-selection-by-router-id">
+<div id="routerid">
 <section id="section-4">
       <h2 id="name-deterministic-selection-by-">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-deterministic-selection-by-" class="section-name selfRef">Deterministic Selection by Router-ID</a>
@@ -1314,8 +1322,14 @@ viaMultipathRouterId( source, group, vias )
       </h2>
 <p id="section-5-1">We describe a Hello Option to exchange "Color"<span class="cref" id="_1">Should we come up with a different name for this?  It has nothing to
 do with SR-TE color, for example.  However, RFC5512's definition of
-Color is just as abstract as this.</span>, an abstract notion
-of grouping of ...<a href="#section-5-1" class="pilcrow">¶</a></p>
+Color is just as abstract as this.
+"MultiTier ID"?</span>, an abstract notion
+of grouping of nodes.  For example, in a 3-tier network, the routers in
+the middle tier could be colored by the spine to which they connect in
+the top tier. In this way, the color value presented to the leaf routers
+by the middle tier is a proxy for the routers in the top tier.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-2">This Hello option should only be advertised "downwards" towards the
+lower levels of the tree.<a href="#section-5-2" class="pilcrow">¶</a></p>
 <div id="color-hello-option-message-format">
 <section id="section-5.1">
         <h3 id="name-color-hello-option-message-">
@@ -1352,16 +1366,18 @@ The Color will be 4 bytes long.<a href="#section-5.1-4" class="pilcrow">¶</a></
       <h2 id="name-deterministic-selection-by-c">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-deterministic-selection-by-c" class="section-name selfRef">Deterministic Selection by Color</a>
       </h2>
-<p id="section-6-1">We use the above Hello Option to add an initial round of hashing,
+<p id="section-6-1">TBD: If not all neighbors advertise color, do we pick from the subset
+that do, or we fall back to <a href="#routerid" class="auto internal xref">Section 4</a>?<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-2">We use the above Hello Option to add an initial round of hashing,
 falling back to the algorithm in <a href="#RouterIdPseudocode" class="auto internal xref">Figure 1</a> to break ties.
 With this mechanism, the first round is to calculate
 <code>hash( S, G, color )</code> for each eligible RPF neighbor, and select
 the highest hash value among this list.  If there are multiple entries
 with the highest hash value, we re-hash among this sub-list
-with <code>viaMultipathRouterId</code> defined above.<a href="#section-6-1" class="pilcrow">¶</a></p>
+with <code>viaMultipathRouterId</code> defined above.<a href="#section-6-2" class="pilcrow">¶</a></p>
 <span id="name-pseudocode-for-deterministic"></span><div id="ColorPseudocode">
 <figure id="figure-3">
-        <div class="alignLeft art-text artwork" id="section-6-2.1">
+        <div class="alignLeft art-text artwork" id="section-6-3.1">
 <pre>
 viaMultipathColor( source, group, vias )
     bestHash = 0
@@ -1384,7 +1400,7 @@ viaMultipathColor( source, group, vias )
 <a href="#name-pseudocode-for-deterministic" class="selfRef">Pseudocode for Deterministic Hashing based on Color</a>
         </figcaption></figure>
 </div>
-<p id="section-6-3"><span class="cref" id="_3">pseudocode format TBD</span><a href="#section-6-3" class="pilcrow">¶</a></p>
+<p id="section-6-4"><span class="cref" id="_3">pseudocode format TBD</span><a href="#section-6-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="security-considerations">
