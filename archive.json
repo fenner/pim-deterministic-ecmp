@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-30T00:37:03.203155+00:00",
+  "timestamp": "2025-03-04T00:40:04.279366+00:00",
   "repo": "fenner/pim-deterministic-ecmp",
   "labels": [
     {
@@ -49,6 +49,55 @@
       "color": "ffffff"
     }
   ],
-  "issues": [],
+  "issues": [
+    {
+      "number": 1,
+      "id": "I_kwDOMinXDc6sPfwh",
+      "title": "Comparison with rfc6754",
+      "url": "https://github.com/fenner/pim-deterministic-ecmp/issues/1",
+      "state": "OPEN",
+      "author": "fenner",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Since rfc6754 is about ECMP, we should have a comparison/justification in this document",
+      "createdAt": "2025-03-02T19:34:38Z",
+      "updatedAt": "2025-03-02T19:34:38Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 2,
+      "id": "I_kwDOMinXDc6sPf4P",
+      "title": "Decide on a pseudocode format",
+      "url": "https://github.com/fenner/pim-deterministic-ecmp/issues/2",
+      "state": "OPEN",
+      "author": "fenner",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Is the python-ish pseudocode ok as is? Should we more more towards the RFC7761 pseudocode format?",
+      "createdAt": "2025-03-02T19:35:40Z",
+      "updatedAt": "2025-03-02T19:35:40Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 3,
+      "id": "I_kwDOMinXDc6sPf-m",
+      "title": "Fix pseudocode bugs",
+      "url": "https://github.com/fenner/pim-deterministic-ecmp/issues/3",
+      "state": "OPEN",
+      "author": "fenner",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "There are a couple of attempts at `bestVia` being singular vs `bestVias` being a list, but, it's just buggy - decide how to fix this and fix it.",
+      "createdAt": "2025-03-02T19:36:26Z",
+      "updatedAt": "2025-03-02T19:36:26Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
   "pulls": []
 }
