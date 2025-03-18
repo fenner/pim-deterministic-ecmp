@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-16T00:43:45.795229+00:00",
+  "timestamp": "2025-03-18T00:40:12.864139+00:00",
   "repo": "fenner/pim-deterministic-ecmp",
   "labels": [
     {
@@ -95,6 +95,22 @@
       "body": "There are a couple of attempts at `bestVia` being singular vs `bestVias` being a list, but, it's just buggy - decide how to fix this and fix it.",
       "createdAt": "2025-03-02T19:36:26Z",
       "updatedAt": "2025-03-02T19:36:26Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 4,
+      "id": "I_kwDOMinXDc6uSlaL",
+      "title": "IPv6",
+      "url": "https://github.com/fenner/pim-deterministic-ecmp/issues/4",
+      "state": "OPEN",
+      "author": "fenner",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "David Lamparter points out that the draft is very IPv4-centric and needs to talk about IPv6",
+      "createdAt": "2025-03-17T08:06:58Z",
+      "updatedAt": "2025-03-17T08:06:58Z",
       "closedAt": null,
       "comments": []
     }
