@@ -90,6 +90,27 @@ and then edited with s/-+-/---/g
 +---+---+---+---+---+---+---+---+---+---+---+---+
 ~~~~
 
+Similarly, when there are two IPv6 addresses and a router ID, we
+conceptually lay these out identically, simply with larger addresses,
+and perform the hash operation across all 36 octets.
+
+{::comment}
+protocol 'address1:32,address2:32,router ID:8'
+and then edited with s/-+-/---/g
+{:/comment}
+~~~~
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+|                            address1                           |
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+|                            address2                           |
++---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+|   router ID   |
++---+---+---+---+
+~~~~
+
+When the hash involves a color, that 32-bit value in network byte order
+takes the place of the 32-bit router ID.
+
 # Deterministic Selection by Router-ID {#routerid}
 
 We use the {{RFC6395}} Hello Option to allow multiple routers to hash a given (S,G)
@@ -138,7 +159,7 @@ viaMultipathRouterId( source, group, vias )
 
 # Hello Option to Exchange Color
 
-We describe a Hello Option to exchange "Color"[^1], an abstract notion
+We describe a Hello Option to exchange "Color", an abstract notion
 of grouping of nodes.  For example, in a 3-tier network, the routers in
 the middle tier could be colored by the spine to which they connect in
 the top tier. In this way, the color value presented to the leaf routers
@@ -146,11 +167,6 @@ by the middle tier is a proxy for the routers in the top tier.
 
 This Hello option should only be advertised "downwards" towards the
 lower levels of the tree.
-
-[^1]: Should we come up with a different name for this?  It has nothing to
-    do with SR-TE color, for example.  However, RFC5512's definition of
-    Color is just as abstract as this.
-    "MultiTier ID"?
 
 ## Color Hello Option Message Format
 
