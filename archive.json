@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-25T00:41:27.254913+00:00",
+  "timestamp": "2025-03-27T00:41:05.387354+00:00",
   "repo": "fenner/pim-deterministic-ecmp",
   "labels": [
     {
@@ -103,15 +103,15 @@
       "id": "I_kwDOMinXDc6uSlaL",
       "title": "IPv6",
       "url": "https://github.com/fenner/pim-deterministic-ecmp/issues/4",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "fenner",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "David Lamparter points out that the draft is very IPv4-centric and needs to talk about IPv6",
       "createdAt": "2025-03-17T08:06:58Z",
-      "updatedAt": "2025-03-17T08:06:58Z",
-      "closedAt": null,
+      "updatedAt": "2025-03-26T15:43:24Z",
+      "closedAt": "2025-03-26T15:43:24Z",
       "comments": []
     }
   ],
