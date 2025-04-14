@@ -34,9 +34,14 @@ author:
     fullname: "Santosh Kumar"
     organization: Arista Networks, Inc.
     email: "skumar@arista.com"
+ -
+    fullname: "Stig Venaas"
+    organization: Cisco Systems, Inc.
+    email: "stig@cisco.com"
 
 normative:
   RFC6395:
+  RFC7761:
 
 informative:
 
@@ -319,6 +324,19 @@ the color in network byte order.
 When at least one router in a set of vias is exchanging color information via the Arista Proprietary
 Color option, they MUST use the Arista-compatible hash algorithm
 to compare colors.
+
+# Cisco Systems Compatibility {#cisco-compatibility}
+
+Cisco has independently of this draft, implemented hashing based on Router-ID as
+discussed in {{routerid}}, except for a few differences listed here.
+
+The hash algorithm used is the RP hash defined in {{RFC7761}} section 4.7.2.
+Using this hash, the hash value is calculated by doing
+hash(router-id, 32, hash(group, 32, source)). In case multiple entries hash
+to the same value, the re-hash is using the interface ID announced in the
+{{RFC6395}} Hello Option rather than local information.
+
+Hashing based on color is not implemented.
 
 # Sample Hash Values
 
