@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-13T02:08:29.229875+00:00",
+  "timestamp": "2025-04-15T00:42:50.149507+00:00",
   "repo": "fenner/pim-deterministic-ecmp",
   "labels": [
     {
@@ -115,5 +115,32 @@
       "comments": []
     }
   ],
-  "pulls": []
+  "pulls": [
+    {
+      "number": 5,
+      "id": "PR_kwDOMinXDc6SjT2m",
+      "title": "Added appendix about Cisco implementation",
+      "url": "https://github.com/fenner/pim-deterministic-ecmp/pull/5",
+      "state": "OPEN",
+      "author": "stvenaas",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "This adds details about the Cisco implementation that has many similarities\nto what is defined in the draft. A new appendix covers the differences.\n",
+      "createdAt": "2025-04-14T21:19:58Z",
+      "updatedAt": "2025-04-14T21:19:59Z",
+      "baseRepository": "fenner/pim-deterministic-ecmp",
+      "baseRefName": "main",
+      "baseRefOid": "264374a67d741838428fc86ffee8a06debc6d682",
+      "headRepository": "stvenaas/pim-deterministic-ecmp",
+      "headRefName": "ciscoappendix",
+      "headRefOid": "9ca28f999d87cfaf962ca11f1932c57ec37c908d",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    }
+  ]
 }
