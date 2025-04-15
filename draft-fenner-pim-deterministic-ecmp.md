@@ -374,6 +374,11 @@ This section is to be removed before publishing as an RFC.
 
 ## Changes since draft-fenner-pim-deterministic-ecmp-00
 
+- Remove the note about coming up with a different term than Color, it feels
+  like Color will suffice
+
+- Added memory layout for IPv6 address hashing
+
 - Added {{cisco-compatibility}} contributed by Stig about Cisco's deterministic hashing
 
 - Corrected sample hash values in {{sample-hash-values}}
