@@ -75,7 +75,7 @@ undesired redundant traffic flow.
 
 # Hash Algorithm
 
-In this document, the hash algorithm used is Bob Jenkin's one-at-a-time hash.
+In this document, the hash algorithm used is Bob Jenkins' one-at-a-time hash.
 This is a very high quality, but fast hash function.
 [Wikipedia](https://en.wikipedia.org/wiki/Jenkins_hash_function#one_at_a_time)
 has one description of the algorithm.  This hash function is defined on sequences of
@@ -327,7 +327,7 @@ to compare colors.
 
 # Cisco Systems Compatibility {#cisco-compatibility}
 
-Cisco has independently of this draft, implemented hashing based on Router-ID as
+Cisco has, independently of this draft, implemented hashing based on Router-ID as
 discussed in {{routerid}}, except for a few differences listed here.
 
 The hash algorithm used is the RP hash defined in {{RFC7761}} section 4.7.2.
@@ -338,38 +338,49 @@ to the same value, the re-hash is using the interface ID announced in the
 
 Hashing based on color is not implemented.
 
-# Sample Hash Values
+# Sample Hash Values {#sample-hash-values}
 
 Hashing with Router-ID:
 
 ~~~~
-hash( 192.0.0.2, 224.1.1.1, 10.0.0.1 ) = 3391492512
-hash( 192.0.0.2, 224.1.1.1, 10.0.0.2 ) = 3391493567
-hash( 192.0.0.2, 224.1.1.1, 10.0.0.3 ) = 3391498574
+hash( 192.0.0.2, 224.1.1.1, 10.0.0.1 ) = 361722995
+hash( 192.0.0.2, 224.1.1.1, 10.0.0.2 ) = 4027394415
+hash( 192.0.0.2, 224.1.1.1, 10.0.0.3 ) = 670832976
 ~~~~
-In this case, the neighbor with Router-ID 10.0.0.3 would
+In this case, the neighbor with Router-ID 10.0.0.2 would
 be chosen.
 
 Hashing with Color, Arista-compatible:
 
 ~~~~
-hash( 192.0.0.2, 224.1.1.1, 10 ) = 3391495569
-hash( 192.0.0.2, 224.1.1.1, 20 ) = 797801633
-hash( 192.0.0.2, 224.1.1.1, 30 ) = 2218733534
+hash( 192.0.0.2, 224.1.1.1, 10 ) = 1271947512
+hash( 192.0.0.2, 224.1.1.1, 20 ) = 3140394629
+hash( 192.0.0.2, 224.1.1.1, 30 ) = 3675908571
 ~~~~
-In this case, the neighbor with color 10 would be chosen.
+In this case, the neighbor with color 30 would be chosen.
 
 Hashing with Color, RFC-compatible:
 
 ~~~~
-hash( 192.0.0.2, 224.1.1.1, 10 ) = 4240030715
-hash( 192.0.0.2, 224.1.1.1, 20 ) = 4240032301
-hash( 192.0.0.2, 224.1.1.1, 30 ) = 4240042647
+hash( 192.0.0.2, 224.1.1.1, 10 ) = 3358313248
+hash( 192.0.0.2, 224.1.1.1, 20 ) = 2756903791
+hash( 192.0.0.2, 224.1.1.1, 30 ) = 2580115048
 ~~~~
-In this case, the neighbor with color 30 would be chosen.
+In this case, the neighbor with color 10 would be chosen.
 
+# Change history
+
+This section is to be removed before publishing as an RFC.
+
+## Changes since draft-fenner-pim-deterministic-ecmp-00
+
+- Added {{cisco-compatibility}} contributed by Stig about Cisco's deterministic hashing
+
+- Corrected sample hash values in {{sample-hash-values}}
 
 # Acknowledgments
 {:numbered="false"}
 
-TODO acknowledge.
+Thanks to Kalpesh Suthar of Juniper Networks for pointing out that
+the sample hash values in draft-fenner-pim-deterministic-ecmp-00 were
+calculated incorrectly.
