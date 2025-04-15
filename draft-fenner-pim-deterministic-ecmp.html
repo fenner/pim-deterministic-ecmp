@@ -7,6 +7,7 @@
 <title>Deterministic Upstream Neighbor Selection for PIM Joins</title>
 <meta content="Bill Fenner" name="author">
 <meta content="Santosh Kumar" name="author">
+<meta content="Stig Venaas" name="author">
 <meta content="
        In densely interconnected networks, a PIM node may have many choices
 as to what upstream neighbor to send a JOIN message to, for a given
@@ -14,20 +15,20 @@ source and group.  This document describes a mechanism for multiple
 nodes (e.g., leaf nodes in a data center) to pick the same upstream
 node (e.g., spine node) to avoid redundant traffic flows. 
     " name="description">
-<meta content="xml2rfc 3.28.0" name="generator">
+<meta content="xml2rfc 3.28.1" name="generator">
 <meta content="ECMP" name="keyword">
 <meta content="PIM Join" name="keyword">
 <meta content="Data Center" name="keyword">
 <meta content="draft-fenner-pim-deterministic-ecmp-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.28.0
+  xml2rfc 3.28.1
     Python 3.12.9
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
     Jinja2 3.1.6
     lxml 5.3.0
-    platformdirs 4.3.6
+    platformdirs 4.3.7
     pycountry 24.6.1
     PyYAML 6.0.2
     requests 2.32.3
@@ -1051,11 +1052,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">PIM Upstream Deterministic ECMP</td>
-<td class="right">March 2025</td>
+<td class="right">April 2025</td>
 </tr></thead>
 <tfoot><tr>
-<td class="left">Fenner &amp; Kumar</td>
-<td class="center">Expires 27 September 2025</td>
+<td class="left">Fenner, et al.</td>
+<td class="center">Expires 17 October 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1068,12 +1069,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-fenner-pim-deterministic-ecmp-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-03-26" class="published">26 March 2025</time>
+<time datetime="2025-04-15" class="published">15 April 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-09-27">27 September 2025</time></dd>
+<dd class="expires"><time datetime="2025-10-17">17 October 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1083,6 +1084,10 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <div class="author">
       <div class="author-name">S. Kumar</div>
 <div class="org">Arista Networks, Inc.</div>
+</div>
+<div class="author">
+      <div class="author-name">S. Venaas</div>
+<div class="org">Cisco Systems, Inc.</div>
 </div>
 </dd>
 </dl>
@@ -1131,7 +1136,7 @@ node (e.g., spine node) to avoid redundant traffic flows.<a href="#section-abstr
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 27 September 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 17 October 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1201,13 +1206,16 @@ node (e.g., spine node) to avoid redundant traffic flows.<a href="#section-abstr
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
-            <p id="section-toc.1-1.11.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-sample-hash-values" class="internal xref">Sample Hash Values</a></p>
+            <p id="section-toc.1-1.11.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-cisco-systems-compatibility" class="internal xref">Cisco Systems Compatibility</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
-            <p id="section-toc.1-1.12.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+            <p id="section-toc.1-1.12.1"><a href="#appendix-C" class="auto internal xref">Appendix C</a>.  <a href="#name-sample-hash-values" class="internal xref">Sample Hash Values</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
-            <p id="section-toc.1-1.13.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.13.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
+            <p id="section-toc.1-1.14.1"><a href="#appendix-E" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1462,6 +1470,10 @@ registry as shown:<a href="#section-8-1" class="pilcrow">¶</a></p>
       <dd>
 <span class="refAuthor">Gulrajani, S.</span> and <span class="refAuthor">S. Venaas</span>, <span class="refTitle">"An Interface Identifier (ID) Hello Option for PIM"</span>, <span class="seriesInfo">RFC 6395</span>, <span class="seriesInfo">DOI 10.17487/RFC6395</span>, <time datetime="2011-10" class="refDate">October 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6395">https://www.rfc-editor.org/rfc/rfc6395</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC7761">[RFC7761]</dt>
+      <dd>
+<span class="refAuthor">Fenner, B.</span>, <span class="refAuthor">Handley, M.</span>, <span class="refAuthor">Holbrook, H.</span>, <span class="refAuthor">Kouvelas, I.</span>, <span class="refAuthor">Parekh, R.</span>, <span class="refAuthor">Zhang, Z.</span>, and <span class="refAuthor">L. Zheng</span>, <span class="refTitle">"Protocol Independent Multicast - Sparse Mode (PIM-SM): Protocol Specification (Revised)"</span>, <span class="seriesInfo">STD 83</span>, <span class="seriesInfo">RFC 7761</span>, <span class="seriesInfo">DOI 10.17487/RFC7761</span>, <time datetime="2016-03" class="refDate">March 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7761">https://www.rfc-editor.org/rfc/rfc7761</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
       <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
@@ -1552,51 +1564,66 @@ to compare colors.<a href="#appendix-A.1-3" class="pilcrow">¶</a></p>
 </div>
 </section>
 </div>
-<div id="sample-hash-values">
+<div id="cisco-compatibility">
 <section id="appendix-B">
-      <h2 id="name-sample-hash-values">
-<a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-sample-hash-values" class="section-name selfRef">Sample Hash Values</a>
+      <h2 id="name-cisco-systems-compatibility">
+<a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-cisco-systems-compatibility" class="section-name selfRef">Cisco Systems Compatibility</a>
       </h2>
-<p id="appendix-B-1">Hashing with Router-ID:<a href="#appendix-B-1" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="appendix-B-2">
+<p id="appendix-B-1">Cisco has independently of this draft, implemented hashing based on Router-ID as
+discussed in <a href="#routerid" class="auto internal xref">Section 4</a>, except for a few differences listed here.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
+<p id="appendix-B-2">The hash algorithm used is the RP hash defined in <span>[<a href="#RFC7761" class="cite xref">RFC7761</a>]</span> section 4.7.2.
+Using this hash, the hash value is calculated by doing
+hash(router-id, 32, hash(group, 32, source)). In case multiple entries hash
+to the same value, the re-hash is using the interface ID announced in the
+<span>[<a href="#RFC6395" class="cite xref">RFC6395</a>]</span> Hello Option rather than local information.<a href="#appendix-B-2" class="pilcrow">¶</a></p>
+<p id="appendix-B-3">Hashing based on color is not implemented.<a href="#appendix-B-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="sample-hash-values">
+<section id="appendix-C">
+      <h2 id="name-sample-hash-values">
+<a href="#appendix-C" class="section-number selfRef">Appendix C. </a><a href="#name-sample-hash-values" class="section-name selfRef">Sample Hash Values</a>
+      </h2>
+<p id="appendix-C-1">Hashing with Router-ID:<a href="#appendix-C-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-C-2">
 <pre>
 hash( 192.0.0.2, 224.1.1.1, 10.0.0.1 ) = 3391492512
 hash( 192.0.0.2, 224.1.1.1, 10.0.0.2 ) = 3391493567
 hash( 192.0.0.2, 224.1.1.1, 10.0.0.3 ) = 3391498574
-</pre><a href="#appendix-B-2" class="pilcrow">¶</a>
+</pre><a href="#appendix-C-2" class="pilcrow">¶</a>
 </div>
-<p id="appendix-B-3">In this case, the neighbor with Router-ID 10.0.0.3 would
-be chosen.<a href="#appendix-B-3" class="pilcrow">¶</a></p>
-<p id="appendix-B-4">Hashing with Color, Arista-compatible:<a href="#appendix-B-4" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="appendix-B-5">
+<p id="appendix-C-3">In this case, the neighbor with Router-ID 10.0.0.3 would
+be chosen.<a href="#appendix-C-3" class="pilcrow">¶</a></p>
+<p id="appendix-C-4">Hashing with Color, Arista-compatible:<a href="#appendix-C-4" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-C-5">
 <pre>
 hash( 192.0.0.2, 224.1.1.1, 10 ) = 3391495569
 hash( 192.0.0.2, 224.1.1.1, 20 ) = 797801633
 hash( 192.0.0.2, 224.1.1.1, 30 ) = 2218733534
-</pre><a href="#appendix-B-5" class="pilcrow">¶</a>
+</pre><a href="#appendix-C-5" class="pilcrow">¶</a>
 </div>
-<p id="appendix-B-6">In this case, the neighbor with color 10 would be chosen.<a href="#appendix-B-6" class="pilcrow">¶</a></p>
-<p id="appendix-B-7">Hashing with Color, RFC-compatible:<a href="#appendix-B-7" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="appendix-B-8">
+<p id="appendix-C-6">In this case, the neighbor with color 10 would be chosen.<a href="#appendix-C-6" class="pilcrow">¶</a></p>
+<p id="appendix-C-7">Hashing with Color, RFC-compatible:<a href="#appendix-C-7" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-C-8">
 <pre>
 hash( 192.0.0.2, 224.1.1.1, 10 ) = 4240030715
 hash( 192.0.0.2, 224.1.1.1, 20 ) = 4240032301
 hash( 192.0.0.2, 224.1.1.1, 30 ) = 4240042647
-</pre><a href="#appendix-B-8" class="pilcrow">¶</a>
+</pre><a href="#appendix-C-8" class="pilcrow">¶</a>
 </div>
-<p id="appendix-B-9">In this case, the neighbor with color 30 would be chosen.<a href="#appendix-B-9" class="pilcrow">¶</a></p>
+<p id="appendix-C-9">In this case, the neighbor with color 30 would be chosen.<a href="#appendix-C-9" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="acknowledgments">
-<section id="appendix-C">
+<section id="appendix-D">
       <h2 id="name-acknowledgments">
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
-<p id="appendix-C-1">TODO acknowledge.<a href="#appendix-C-1" class="pilcrow">¶</a></p>
+<p id="appendix-D-1">TODO acknowledge.<a href="#appendix-D-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">
-<section id="appendix-D">
+<section id="appendix-E">
       <h2 id="name-authors-addresses">
 <a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>
@@ -1614,6 +1641,14 @@ hash( 192.0.0.2, 224.1.1.1, 30 ) = 4240042647
 <div class="email">
 <span>Email:</span>
 <a href="mailto:skumar@arista.com" class="email">skumar@arista.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Stig Venaas</span></div>
+<div dir="auto" class="left"><span class="org">Cisco Systems, Inc.</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:stig@cisco.com" class="email">stig@cisco.com</a>
 </div>
 </address>
 </section>

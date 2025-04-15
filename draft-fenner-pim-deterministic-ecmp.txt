@@ -5,7 +5,9 @@
 Protocols for IP Multicast                                     B. Fenner
 Internet-Draft                                                  S. Kumar
 Intended status: Informational                     Arista Networks, Inc.
-Expires: 27 September 2025                                 26 March 2025
+Expires: 17 October 2025                                       S. Venaas
+                                                     Cisco Systems, Inc.
+                                                           15 April 2025
 
 
         Deterministic Upstream Neighbor Selection for PIM Joins
@@ -52,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 27 September 2025.
+   This Internet-Draft will expire on 17 October 2025.
 
 Copyright Notice
 
@@ -82,7 +84,8 @@ Table of Contents
    9.  Normative References
    Appendix A.  Arista Networks Compatibility
      A.1.  Arista Color Hash Algorithm
-   Appendix B.  Sample Hash Values
+   Appendix B.  Cisco Systems Compatibility
+   Appendix C.  Sample Hash Values
    Acknowledgments
    Authors' Addresses
 
@@ -277,6 +280,12 @@ Table of Contents
               Hello Option for PIM", RFC 6395, DOI 10.17487/RFC6395,
               October 2011, <https://www.rfc-editor.org/rfc/rfc6395>.
 
+   [RFC7761]  Fenner, B., Handley, M., Holbrook, H., Kouvelas, I.,
+              Parekh, R., Zhang, Z., and L. Zheng, "Protocol Independent
+              Multicast - Sparse Mode (PIM-SM): Protocol Specification
+              (Revised)", STD 83, RFC 7761, DOI 10.17487/RFC7761, March
+              2016, <https://www.rfc-editor.org/rfc/rfc7761>.
+
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
@@ -348,7 +357,22 @@ A.1.  Arista Color Hash Algorithm
    Proprietary Color option, they MUST use the Arista-compatible hash
    algorithm to compare colors.
 
-Appendix B.  Sample Hash Values
+Appendix B.  Cisco Systems Compatibility
+
+   Cisco has independently of this draft, implemented hashing based on
+   Router-ID as discussed in Section 4, except for a few differences
+   listed here.
+
+   The hash algorithm used is the RP hash defined in [RFC7761] section
+   4.7.2.  Using this hash, the hash value is calculated by doing
+   hash(router-id, 32, hash(group, 32, source)).  In case multiple
+   entries hash to the same value, the re-hash is using the interface ID
+   announced in the [RFC6395] Hello Option rather than local
+   information.
+
+   Hashing based on color is not implemented.
+
+Appendix C.  Sample Hash Values
 
    Hashing with Router-ID:
 
@@ -388,3 +412,8 @@ Authors' Addresses
    Santosh Kumar
    Arista Networks, Inc.
    Email: skumar@arista.com
+
+
+   Stig Venaas
+   Cisco Systems, Inc.
+   Email: stig@cisco.com
