@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-15T00:42:50.149507+00:00",
+  "timestamp": "2025-04-17T00:41:57.873315+00:00",
   "repo": "fenner/pim-deterministic-ecmp",
   "labels": [
     {
@@ -113,6 +113,38 @@
       "updatedAt": "2025-03-26T15:43:24Z",
       "closedAt": "2025-03-26T15:43:24Z",
       "comments": []
+    },
+    {
+      "number": 6,
+      "id": "I_kwDOMinXDc6ypY0Q",
+      "title": "Better reference for Jenkins hash",
+      "url": "https://github.com/fenner/pim-deterministic-ecmp/issues/6",
+      "state": "OPEN",
+      "author": "fenner",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "At IETF122, some of the discussion in the room after the meeting wondered if we could get a better reference for the Jenkins hash than the Wikipedia article.\n",
+      "createdAt": "2025-04-15T17:56:33Z",
+      "updatedAt": "2025-04-15T17:56:33Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 7,
+      "id": "I_kwDOMinXDc6ypZwM",
+      "title": "How to evaluate hash function quality",
+      "url": "https://github.com/fenner/pim-deterministic-ecmp/issues/7",
+      "state": "OPEN",
+      "author": "fenner",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "In the meeting room at IETF122, there were some questions about how to evaluate the choice of a hash function. Is the Jenkins hash the right one? Can we compare it with the hash in the PIM spec (widely known to be poor quality, and the IPv6 handling is even worse, but - rather than saying \"xor is bad\", let's say \"we evaluate by this metric\")\n",
+      "createdAt": "2025-04-15T17:58:26Z",
+      "updatedAt": "2025-04-15T17:58:26Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -121,26 +153,42 @@
       "id": "PR_kwDOMinXDc6SjT2m",
       "title": "Added appendix about Cisco implementation",
       "url": "https://github.com/fenner/pim-deterministic-ecmp/pull/5",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "stvenaas",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "This adds details about the Cisco implementation that has many similarities\nto what is defined in the draft. A new appendix covers the differences.\n",
       "createdAt": "2025-04-14T21:19:58Z",
-      "updatedAt": "2025-04-14T21:19:59Z",
+      "updatedAt": "2025-04-15T15:58:17Z",
       "baseRepository": "fenner/pim-deterministic-ecmp",
       "baseRefName": "main",
       "baseRefOid": "264374a67d741838428fc86ffee8a06debc6d682",
       "headRepository": "stvenaas/pim-deterministic-ecmp",
       "headRefName": "ciscoappendix",
       "headRefOid": "9ca28f999d87cfaf962ca11f1932c57ec37c908d",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-04-15T15:58:17Z",
+      "mergedAt": "2025-04-15T15:58:17Z",
+      "mergedBy": "fenner",
+      "mergeCommit": {
+        "oid": "becedf66ebbedb166e20c5c1fcf7f3a77b0fc60f"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOMinXDc6lCzaV",
+          "commit": {
+            "abbreviatedOid": "9ca28f9"
+          },
+          "author": "fenner",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-04-15T15:57:31Z",
+          "updatedAt": "2025-04-15T15:57:31Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
