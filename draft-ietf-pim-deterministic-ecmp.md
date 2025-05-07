@@ -3,7 +3,7 @@ title: "Deterministic Upstream Neighbor Selection for PIM Joins"
 abbrev: "PIM Upstream Deterministic ECMP"
 category: info
 
-docname: draft-fenner-pim-deterministic-ecmp-latest
+docname: draft-ietf-pim-deterministic-ecmp-latest
 submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
 number:
 date:
@@ -23,7 +23,7 @@ venue:
   mail: "pim@ietf.org"
   arch: "https://mailarchive.ietf.org/arch/browse/pim/"
   github: "fenner/pim-deterministic-ecmp"
-  latest: "https://fenner.github.io/pim-deterministic-ecmp/draft-fenner-pim-deterministic-ecmp.html"
+  latest: "https://fenner.github.io/pim-deterministic-ecmp/draft-ietf-pim-deterministic-ecmp.html"
 
 author:
  -
@@ -382,6 +382,10 @@ This section is to be removed before publishing as an RFC.
 - Added {{cisco-compatibility}} contributed by Stig about Cisco's deterministic hashing
 
 - Corrected sample hash values in {{sample-hash-values}}
+
+## Changes since draft-fenner-pim-deterministic-ecmp-01
+
+- Accepted as PIM WG work item
 
 # Acknowledgments
 {:numbered="false"}
