@@ -5,13 +5,13 @@
 Protocols for IP Multicast                                     B. Fenner
 Internet-Draft                                                  S. Kumar
 Intended status: Informational                     Arista Networks, Inc.
-Expires: 17 October 2025                                       S. Venaas
+Expires: 8 November 2025                                       S. Venaas
                                                      Cisco Systems, Inc.
-                                                           15 April 2025
+                                                              7 May 2025
 
 
         Deterministic Upstream Neighbor Selection for PIM Joins
-               draft-fenner-pim-deterministic-ecmp-latest
+                draft-ietf-pim-deterministic-ecmp-latest
 
 Abstract
 
@@ -26,9 +26,9 @@ About This Document
    This note is to be removed before publishing as an RFC.
 
    The latest revision of this draft can be found at
-   https://fenner.github.io/pim-deterministic-ecmp/draft-fenner-pim-
+   https://fenner.github.io/pim-deterministic-ecmp/draft-ietf-pim-
    deterministic-ecmp.html.  Status information for this document may be
-   found at https://datatracker.ietf.org/doc/draft-fenner-pim-
+   found at https://datatracker.ietf.org/doc/draft-ietf-pim-
    deterministic-ecmp/.
 
    Discussion of this document takes place on the Protocols for IP
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 17 October 2025.
+   This Internet-Draft will expire on 8 November 2025.
 
 Copyright Notice
 
@@ -88,6 +88,7 @@ Table of Contents
    Appendix C.  Sample Hash Values
    Appendix D.  Change history
      D.1.  Changes since draft-fenner-pim-deterministic-ecmp-00
+     D.2.  Changes since draft-fenner-pim-deterministic-ecmp-01
    Acknowledgments
    Authors' Addresses
 
@@ -406,10 +407,19 @@ Appendix D.  Change history
 
 D.1.  Changes since draft-fenner-pim-deterministic-ecmp-00
 
+   *  Remove the note about coming up with a different term than Color,
+      it feels like Color will suffice
+
+   *  Added memory layout for IPv6 address hashing
+
    *  Added Appendix B contributed by Stig about Cisco's deterministic
       hashing
 
    *  Corrected sample hash values in Appendix C
+
+D.2.  Changes since draft-fenner-pim-deterministic-ecmp-01
+
+   *  Accepted as PIM WG work item
 
 Acknowledgments
 
