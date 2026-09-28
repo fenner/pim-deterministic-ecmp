@@ -13,6 +13,7 @@
 /.venv/
 /.vscode/
 /*-[0-9][0-9].xml
+/lib
 /node_modules/
 /versioned/
 archive.json
