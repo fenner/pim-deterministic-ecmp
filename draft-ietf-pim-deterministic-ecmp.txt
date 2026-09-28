@@ -89,6 +89,7 @@ Table of Contents
    Appendix D.  Change history
      D.1.  Changes since draft-fenner-pim-deterministic-ecmp-00
      D.2.  Changes since draft-fenner-pim-deterministic-ecmp-01
+     D.3.  Changes since draft-fenner-pim-deterministic-ecmp-02
    Acknowledgments
    Authors' Addresses
 
@@ -167,31 +168,31 @@ Table of Contents
    results in higher configuration overhead but more deployment
    flexibility.
 
-   viaMultipathRouterId( source, group, vias )
+   def viaMultipathRouterId( source, group, vias ):
        bestHash = 0
        bestVias = []
        for via in vias:
            routerId = getRouterId( via )
-           curHash = hash( source, group, routerId )
+           curHash = calculateHash( source, group, routerId )
            if curHash > bestHash:
-               bestVia = [ via ]
+               bestVias = [ via ]
                bestHash = curHash
-           else if curHash == bestHash:
-               bestVia.append( via )
+           elif curHash == bestHash:
+               bestVias.append( via )
+       if len( bestVias ) == 1:
+           return bestVias[ 0 ]
        bestHash = 0
-       if len( bestVia ) == 1:
-           return bestVia[0]
-       for via in bestVia:
-           curHash = hash( source, group, local-information )
+       bestVia = None
+       for via in bestVias:
+           local_information = getLocalInformation( via )
+           curHash = calculateHash( source, group, local_information )
            if curHash > bestHash:
                bestVia = via
+               bestHash = curHash
 
        return bestVia
 
      Figure 1: Pseudocode for Deterministic Hashing based on Router ID
-
-
-   // pseudocode format TBD
 
 5.  Hello Option to Exchange Color
 
@@ -239,26 +240,22 @@ Table of Contents
    value, we re-hash among this sub-list with viaMultipathRouterId
    defined above.
 
-   viaMultipathColor( source, group, vias )
+   def viaMultipathColor( source, group, vias ):
        bestHash = 0
        bestVias = []
        for via in vias:
            color = getNeighborColor( via )
-           curHash = hash( source, group, color )
+           curHash = calculateHash( source, group, color )
            if curHash > bestHash:
-               bestVia = [ via ]
+               bestVias = [ via ]
                bestHash = curHash
-           else if curHash == bestHash:
-               bestVia.append( via )
-       bestHash = 0
-       if len( bestVia ) == 1:
-           return bestVia[0]
-       return viaMultipathRouterId( source, group, bestVia )
+           elif curHash == bestHash:
+               bestVias.append( via )
+       if len( bestVias ) == 1:
+           return bestVias[ 0 ]
+       return viaMultipathRouterId( source, group, bestVias )
 
        Figure 3: Pseudocode for Deterministic Hashing based on Color
-
-
-   // pseudocode format TBD
 
 7.  Security Considerations
 
@@ -420,6 +417,12 @@ D.1.  Changes since draft-fenner-pim-deterministic-ecmp-00
 D.2.  Changes since draft-fenner-pim-deterministic-ecmp-01
 
    *  Accepted as PIM WG work item
+
+D.3.  Changes since draft-fenner-pim-deterministic-ecmp-02
+
+   *  Fixed typos in hash pseudocode.
+
+   *  Use python for pseudocode (it was already almost python)
 
 Acknowledgments
 

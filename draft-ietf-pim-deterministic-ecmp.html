@@ -1217,6 +1217,9 @@ node (e.g., spine node) to avoid redundant traffic flows.<a href="#section-abstr
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.2">
                 <p id="section-toc.1-1.13.2.2.1"><a href="#appendix-D.2" class="auto internal xref">D.2</a>.  <a href="#name-changes-since-draft-fenner-p" class="internal xref">Changes since draft-fenner-pim-deterministic-ecmp-01</a></p>
 </li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.3">
+                <p id="section-toc.1-1.13.2.3.1"><a href="#appendix-D.3" class="auto internal xref">D.3</a>.  <a href="#name-changes-since-draft-fenner-pi" class="internal xref">Changes since draft-fenner-pim-deterministic-ecmp-02</a></p>
+</li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
@@ -1316,26 +1319,29 @@ interface, which results in higher configuration overhead but more deployment
 flexibility.<a href="#section-4-2" class="pilcrow">¶</a></p>
 <span id="name-pseudocode-for-deterministi"></span><div id="RouterIdPseudocode">
 <figure id="figure-1">
-        <div class="alignLeft art-text artwork" id="section-4-3.1">
+        <div class="alignLeft art-python art-text artwork" id="section-4-3.1">
 <pre>
-viaMultipathRouterId( source, group, vias )
+def viaMultipathRouterId( source, group, vias ):
     bestHash = 0
     bestVias = []
     for via in vias:
         routerId = getRouterId( via )
-        curHash = hash( source, group, routerId )
+        curHash = calculateHash( source, group, routerId )
         if curHash &gt; bestHash:
-            bestVia = [ via ]
+            bestVias = [ via ]
             bestHash = curHash
-        else if curHash == bestHash:
-            bestVia.append( via )
+        elif curHash == bestHash:
+            bestVias.append( via )
+    if len( bestVias ) == 1:
+        return bestVias[ 0 ]
     bestHash = 0
-    if len( bestVia ) == 1:
-        return bestVia[0]
-    for via in bestVia:
-        curHash = hash( source, group, local-information )
+    bestVia = None
+    for via in bestVias:
+        local_information = getLocalInformation( via )
+        curHash = calculateHash( source, group, local_information )
         if curHash &gt; bestHash:
             bestVia = via
+            bestHash = curHash
 
     return bestVia
 </pre>
@@ -1344,7 +1350,6 @@ viaMultipathRouterId( source, group, vias )
 <a href="#name-pseudocode-for-deterministi" class="selfRef">Pseudocode for Deterministic Hashing based on Router ID</a>
         </figcaption></figure>
 </div>
-<p id="section-4-4"><span class="cref" id="_2">pseudocode format TBD</span><a href="#section-4-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="hello-option-to-exchange-color">
@@ -1406,30 +1411,28 @@ with the highest hash value, we re-hash among this sub-list
 with <code>viaMultipathRouterId</code> defined above.<a href="#section-6-2" class="pilcrow">¶</a></p>
 <span id="name-pseudocode-for-deterministic"></span><div id="ColorPseudocode">
 <figure id="figure-3">
-        <div class="alignLeft art-text artwork" id="section-6-3.1">
+        <div class="alignLeft art-python art-text artwork" id="section-6-3.1">
 <pre>
-viaMultipathColor( source, group, vias )
+def viaMultipathColor( source, group, vias ):
     bestHash = 0
     bestVias = []
     for via in vias:
         color = getNeighborColor( via )
-        curHash = hash( source, group, color )
+        curHash = calculateHash( source, group, color )
         if curHash &gt; bestHash:
-            bestVia = [ via ]
+            bestVias = [ via ]
             bestHash = curHash
-        else if curHash == bestHash:
-            bestVia.append( via )
-    bestHash = 0
-    if len( bestVia ) == 1:
-        return bestVia[0]
-    return viaMultipathRouterId( source, group, bestVia )
+        elif curHash == bestHash:
+            bestVias.append( via )
+    if len( bestVias ) == 1:
+        return bestVias[ 0 ]
+    return viaMultipathRouterId( source, group, bestVias )
 </pre>
 </div>
 <figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
 <a href="#name-pseudocode-for-deterministic" class="selfRef">Pseudocode for Deterministic Hashing based on Color</a>
         </figcaption></figure>
 </div>
-<p id="section-6-4"><span class="cref" id="_3">pseudocode format TBD</span><a href="#section-6-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="security-considerations">
@@ -1658,6 +1661,21 @@ like Color will suffice<a href="#appendix-D.1-1.1.1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-D.2-1.1">
             <p id="appendix-D.2-1.1.1">Accepted as PIM WG work item<a href="#appendix-D.2-1.1.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+</section>
+</div>
+<div id="changes-since-draft-fenner-pim-deterministic-ecmp-02">
+<section id="appendix-D.3">
+        <h3 id="name-changes-since-draft-fenner-pi">
+<a href="#appendix-D.3" class="section-number selfRef">D.3. </a><a href="#name-changes-since-draft-fenner-pi" class="section-name selfRef">Changes since draft-fenner-pim-deterministic-ecmp-02</a>
+        </h3>
+<ul class="normal">
+<li class="normal" id="appendix-D.3-1.1">
+            <p id="appendix-D.3-1.1.1">Fixed typos in hash pseudocode.<a href="#appendix-D.3-1.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-D.3-1.2">
+            <p id="appendix-D.3-1.2.1">Use python for pseudocode (it was already almost python)<a href="#appendix-D.3-1.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
