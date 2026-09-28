@@ -42,9 +42,21 @@ author:
 normative:
   RFC6395:
   RFC7761:
+  Jenkins-Hash:
+    target: http://www.burtleburtle.net/bob/hash/doobs.html
+    title: One-at-a-Time Hash
+    author:
+      ins: B. Jenkins
+    date: 1997-09
 
 informative:
-
+  Jenkins-DDJ:
+    title: Hash Functions
+    author:
+        ins: B. Jenkins
+    date: 1997-09
+    seriesinfo:
+       "Dr. Dobb's Journal": "vol. 22, no. 9, pp. 107-109"
 
 --- abstract
 
@@ -77,8 +89,11 @@ undesired redundant traffic flow.
 
 In this document, the hash algorithm used is Bob Jenkins' one-at-a-time hash.
 This is a very high quality, but fast hash function.
-[Wikipedia](https://en.wikipedia.org/wiki/Jenkins_hash_function#one_at_a_time)
-has one description of the algorithm.  This hash function is defined on sequences of
+A suite of related hash functions was originally published in an article in
+Dr.  Dobbs' Journal {{Jenkins-DDJ}}.
+The "one at a time" hash used in this document {{Jenkins-Hash}} is an update
+to that journal article that Jenkins later posted on his web site.
+This hash function is defined on sequences of
 octets; it is performed across all of the addresses given in network byte order.
 
 Pseudocode like `hash( address1, address2, address3 )` conceptually
