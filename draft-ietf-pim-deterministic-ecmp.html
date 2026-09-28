@@ -1192,7 +1192,15 @@ node (e.g., spine node) to avoid redundant traffic flows.<a href="#section-abstr
             <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-references" class="internal xref">References</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.1">
+                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="auto internal xref">9.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.2">
+                <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="auto internal xref">9.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
             <p id="section-toc.1-1.10.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-arista-networks-compatibili" class="internal xref">Arista Networks Compatibility</a></p>
@@ -1266,8 +1274,11 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       </h2>
 <p id="section-3-1">In this document, the hash algorithm used is Bob Jenkins' one-at-a-time hash.
 This is a very high quality, but fast hash function.
-<a href="https://en.wikipedia.org/wiki/Jenkins_hash_function#one_at_a_time">Wikipedia</a>
-has one description of the algorithm.  This hash function is defined on sequences of
+A suite of related hash functions was originally published in an article in
+Dr.  Dobbs' Journal <span>[<a href="#Jenkins-DDJ" class="cite xref">Jenkins-DDJ</a>]</span>.
+The "one at a time" hash used in this document <span>[<a href="#Jenkins-Hash" class="cite xref">Jenkins-Hash</a>]</span> is an update
+to that journal article that Jenkins later posted on his web site.
+This hash function is defined on sequences of
 octets; it is performed across all of the addresses given in network byte order.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">Pseudocode like <code>hash( address1, address2, address3 )</code> conceptually
 lays out these addresses adjacent to each other in memory in network
@@ -1471,29 +1482,53 @@ registry as shown:<a href="#section-8-1" class="pilcrow">¶</a></p>
       </table>
 </section>
 </div>
-<div id="sec-normative-references">
+<div id="sec-combined-references">
 <section id="section-9">
-      <h2 id="name-normative-references">
-<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+      <h2 id="name-references">
+<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-references" class="section-name selfRef">References</a>
       </h2>
+<div id="sec-normative-references">
+<section id="section-9.1">
+        <h3 id="name-normative-references">
+<a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+        </h3>
 <dl class="references">
 <dt id="RFC6395">[RFC6395]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Gulrajani, S.</span> and <span class="refAuthor">S. Venaas</span>, <span class="refTitle">"An Interface Identifier (ID) Hello Option for PIM"</span>, <span class="seriesInfo">RFC 6395</span>, <span class="seriesInfo">DOI 10.17487/RFC6395</span>, <time datetime="2011-10" class="refDate">October 2011</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6395">https://www.rfc-editor.org/rfc/rfc6395</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC7761">[RFC7761]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Fenner, B.</span>, <span class="refAuthor">Handley, M.</span>, <span class="refAuthor">Holbrook, H.</span>, <span class="refAuthor">Kouvelas, I.</span>, <span class="refAuthor">Parekh, R.</span>, <span class="refAuthor">Zhang, Z.</span>, and <span class="refAuthor">L. Zheng</span>, <span class="refTitle">"Protocol Independent Multicast - Sparse Mode (PIM-SM): Protocol Specification (Revised)"</span>, <span class="seriesInfo">STD 83</span>, <span class="seriesInfo">RFC 7761</span>, <span class="seriesInfo">DOI 10.17487/RFC7761</span>, <time datetime="2016-03" class="refDate">March 2016</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7761">https://www.rfc-editor.org/rfc/rfc7761</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="Jenkins-Hash">[Jenkins-Hash]</dt>
+        <dd>
+<span class="refAuthor">Jenkins, B.</span>, <span class="refTitle">"One-at-a-Time Hash"</span>, <time datetime="1997-09" class="refDate">September 1997</time>, <span>&lt;<a href="http://www.burtleburtle.net/bob/hash/doobs.html">http://www.burtleburtle.net/bob/hash/doobs.html</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8174">[RFC8174]</dt>
-    <dd>
+      <dd>
 <span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
+</section>
+</div>
+<div id="sec-informative-references">
+<section id="section-9.2">
+        <h3 id="name-informative-references">
+<a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+        </h3>
+<dl class="references">
+<dt id="Jenkins-DDJ">[Jenkins-DDJ]</dt>
+      <dd>
+<span class="refAuthor">Jenkins, B.</span>, <span class="refTitle">"Hash Functions"</span>, <span class="seriesInfo">Dr. Dobb's Journal vol. 22, no. 9, pp. 107-109</span>, <time datetime="1997-09" class="refDate">September 1997</time>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+</div>
 </section>
 </div>
 <div id="arista-compatibility">
