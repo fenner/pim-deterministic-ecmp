@@ -135,32 +135,33 @@ connect to the same peer.  It could also be a locally-configured value on each
 interface, which results in higher configuration overhead but more deployment
 flexibility.
 
+{: sourcecode-type="python"}
 ~~~
-viaMultipathRouterId( source, group, vias )
+def viaMultipathRouterId( source, group, vias ):
     bestHash = 0
     bestVias = []
     for via in vias:
         routerId = getRouterId( via )
-        curHash = hash( source, group, routerId )
+        curHash = calculateHash( source, group, routerId )
         if curHash > bestHash:
-            bestVia = [ via ]
+            bestVias = [ via ]
             bestHash = curHash
-        else if curHash == bestHash:
-            bestVia.append( via )
+        elif curHash == bestHash:
+            bestVias.append( via )
+    if len( bestVias ) == 1:
+        return bestVias[ 0 ]
     bestHash = 0
-    if len( bestVia ) == 1:
-        return bestVia[0]
-    for via in bestVia:
-        curHash = hash( source, group, local-information )
+    bestVia = None
+    for via in bestVias:
+        local_information = getLocalInformation( via )
+        curHash = calculateHash( source, group, local_information )
         if curHash > bestHash:
             bestVia = via
+            bestHash = curHash
 
     return bestVia
 ~~~
 {: #RouterIdPseudocode title='Pseudocode for Deterministic Hashing based on Router ID'}
-[^2]
-
-[^2]: pseudocode format TBD
 
 # Hello Option to Exchange Color
 
@@ -211,27 +212,24 @@ the highest hash value among this list.  If there are multiple entries
 with the highest hash value, we re-hash among this sub-list
 with `viaMultipathRouterId` defined above.
 
+{: sourcecode-type="python"}
 ~~~
-viaMultipathColor( source, group, vias )
+def viaMultipathColor( source, group, vias ):
     bestHash = 0
     bestVias = []
     for via in vias:
         color = getNeighborColor( via )
-        curHash = hash( source, group, color )
+        curHash = calculateHash( source, group, color )
         if curHash > bestHash:
-            bestVia = [ via ]
+            bestVias = [ via ]
             bestHash = curHash
-        else if curHash == bestHash:
-            bestVia.append( via )
-    bestHash = 0
-    if len( bestVia ) == 1:
-        return bestVia[0]
-    return viaMultipathRouterId( source, group, bestVia )
+        elif curHash == bestHash:
+            bestVias.append( via )
+    if len( bestVias ) == 1:
+        return bestVias[ 0 ]
+    return viaMultipathRouterId( source, group, bestVias )
 ~~~
 {: #ColorPseudocode title='Pseudocode for Deterministic Hashing based on Color'}
-[^3]
-
-[^3]: pseudocode format TBD
 
 # Security Considerations
 
@@ -386,6 +384,12 @@ This section is to be removed before publishing as an RFC.
 ## Changes since draft-fenner-pim-deterministic-ecmp-01
 
 - Accepted as PIM WG work item
+
+## Changes since draft-fenner-pim-deterministic-ecmp-02
+
+- Fixed typos in hash pseudocode.
+
+- Use python for pseudocode (it was already almost python)
 
 # Acknowledgments
 {:numbered="false"}
