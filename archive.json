@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-17T00:41:57.873315+00:00",
+  "timestamp": "2026-09-29T05:01:39.287069+00:00",
   "repo": "fenner/pim-deterministic-ecmp",
   "labels": [
     {
@@ -62,24 +62,32 @@
       "labels": [],
       "body": "Since rfc6754 is about ECMP, we should have a comparison/justification in this document",
       "createdAt": "2025-03-02T19:34:38Z",
-      "updatedAt": "2025-03-02T19:34:38Z",
+      "updatedAt": "2026-09-28T19:15:00Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "arista-skumar",
+          "authorAssociation": "NONE",
+          "body": "Comparison:\n\n| Aspect | RFC 6754: ECMP Redirect | Deterministic-ECMP draft |\n|---|---|---|\n| Core model | Reactive, upstream-directed correction | Proactive, independently reproducible selection |\n| Operation | Upstream router tells a downstream router where to redirect PIM Joins | Each downstream router selects from eligible RPF neighbors itself |\n| Coordination | Explicit PIM ECMP Redirect message | Common deterministic hash; no per-flow redirect signaling |\n| Initial behavior | Downstream selects an RPF path normally, then may be redirected | Downstream hashes before it transmits the Join |\n| Scope/topology | Parallel, single-hop ECMP links in a configured ECMP bundle | Two-tier Router-ID selection plus Color for arbitrary multi-tier networks |\n| Selection policy | Administratively selected preference and metric; lower numeric values win | Bob Jenkins one-at-a-time hash; highest hash value wins |\n| Control traffic | Rate-limited redirects, only when a correction is needed | PIM Hello information; no corrective per-`(S,G)` message |\n\n```text\nRFC 6754\n--------\nDownstream makes an initial ECMP choice\n  -> Upstream detects duplicate or non-preferred forwarding\n  -> Upstream sends an ECMP Redirect\n  -> Downstream joins the requested neighbor/interface and prunes its old path\n\nThis draft\n-------------------------\nRouters determine the same eligible neighbors\n  -> Each calculates a specified hash using (S, G, Router-ID or Color)\n  -> Each selects the same highest-ranked candidate\n  -> Joins converge on that candidate without a redirect\n\nRFC 6754 and the draft solve adjacent but distinct problems. \n\n- Choose **RFC 6754's model** when an upstream router must dynamically impose\n  an administrative preference and can correct already-created PIM state.\n- Choose **The draft model** when the primary requirement is\n  for independently operating routers to select the same upstream neighbor from\n  the beginning, especially in a Clos or other multi-tier data-center fabric.\n- Combined model is also possible.\n```",
+          "createdAt": "2026-09-28T19:15:00Z",
+          "updatedAt": "2026-09-28T19:15:00Z"
+        }
+      ]
     },
     {
       "number": 2,
       "id": "I_kwDOMinXDc6sPf4P",
       "title": "Decide on a pseudocode format",
       "url": "https://github.com/fenner/pim-deterministic-ecmp/issues/2",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "fenner",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "Is the python-ish pseudocode ok as is? Should we more more towards the RFC7761 pseudocode format?",
       "createdAt": "2025-03-02T19:35:40Z",
-      "updatedAt": "2025-03-02T19:35:40Z",
-      "closedAt": null,
+      "updatedAt": "2026-09-28T16:04:06Z",
+      "closedAt": "2026-09-28T16:04:06Z",
       "comments": []
     },
     {
@@ -87,15 +95,15 @@
       "id": "I_kwDOMinXDc6sPf-m",
       "title": "Fix pseudocode bugs",
       "url": "https://github.com/fenner/pim-deterministic-ecmp/issues/3",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "fenner",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "There are a couple of attempts at `bestVia` being singular vs `bestVias` being a list, but, it's just buggy - decide how to fix this and fix it.",
       "createdAt": "2025-03-02T19:36:26Z",
-      "updatedAt": "2025-03-02T19:36:26Z",
-      "closedAt": null,
+      "updatedAt": "2026-09-28T16:04:05Z",
+      "closedAt": "2026-09-28T16:04:05Z",
       "comments": []
     },
     {
@@ -119,15 +127,15 @@
       "id": "I_kwDOMinXDc6ypY0Q",
       "title": "Better reference for Jenkins hash",
       "url": "https://github.com/fenner/pim-deterministic-ecmp/issues/6",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "fenner",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "At IETF122, some of the discussion in the room after the meeting wondered if we could get a better reference for the Jenkins hash than the Wikipedia article.\n",
       "createdAt": "2025-04-15T17:56:33Z",
-      "updatedAt": "2025-04-15T17:56:33Z",
-      "closedAt": null,
+      "updatedAt": "2026-09-28T16:25:20Z",
+      "closedAt": "2026-09-28T16:25:20Z",
       "comments": []
     },
     {
