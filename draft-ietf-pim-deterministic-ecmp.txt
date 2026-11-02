@@ -94,7 +94,6 @@ Table of Contents
      D.1.  Changes since draft-fenner-pim-deterministic-ecmp-00
      D.2.  Changes since draft-fenner-pim-deterministic-ecmp-01
      D.3.  Changes since draft-ietf-pim-deterministic-ecmp-00
-     D.4.  Changes since draft-ietf-pim-deterministic-ecmp-01
    Acknowledgments
    Authors' Addresses
 
@@ -470,10 +469,6 @@ D.2.  Changes since draft-fenner-pim-deterministic-ecmp-01
    *  Accepted as PIM WG work item
 
 D.3.  Changes since draft-ietf-pim-deterministic-ecmp-00
-
-   *  Fix sample hash values
-
-D.4.  Changes since draft-ietf-pim-deterministic-ecmp-01
 
    *  Fixed typos in hash pseudocode.
 
