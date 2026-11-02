@@ -8,6 +8,7 @@
 <meta content="Bill Fenner" name="author">
 <meta content="Santosh Kumar" name="author">
 <meta content="Stig Venaas" name="author">
+<meta content="Hooman Bidgoli" name="author">
 <meta content="
        In densely interconnected networks, a PIM node may have many choices
 as to what upstream neighbor to send a JOIN message to, for a given
@@ -22,18 +23,18 @@ node (e.g., spine node) to avoid redundant traffic flows.
 <meta content="draft-ietf-pim-deterministic-ecmp-latest" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.34.1
-    Python 3.14.7
-    ConfigArgParse 1.7.7
+    Python 3.14.8
+    ConfigArgParse 1.8.0
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
     lxml 6.1.1
     natsort 8.4.0
-    platformdirs 4.11.10
+    platformdirs 4.13.4
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.33.1
-    wcwidth 0.8.4
+    wcwidth 0.9.2
 -->
 <link href="draft-ietf-pim-deterministic-ecmp.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1049,11 +1050,11 @@ svg {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">PIM Upstream Deterministic ECMP</td>
-<td class="right">September 2026</td>
+<td class="right">November 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Fenner, et al.</td>
-<td class="center">Expires 1 April 2027</td>
+<td class="center">Expires 6 May 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1066,12 +1067,12 @@ svg {
 <dd class="internet-draft">draft-ietf-pim-deterministic-ecmp-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-09-28" class="published">28 September 2026</time>
+<time datetime="2026-11-02" class="published">2 November 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-04-01">1 April 2027</time></dd>
+<dd class="expires"><time datetime="2027-05-06">6 May 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1085,6 +1086,10 @@ svg {
 <div class="author">
       <div class="author-name">S. Venaas</div>
 <div class="org">Cisco Systems, Inc.</div>
+</div>
+<div class="author">
+      <div class="author-name">H. Bidgoli</div>
+<div class="org">Nokia</div>
 </div>
 </dd>
 </dl>
@@ -1133,7 +1138,7 @@ node (e.g., spine node) to avoid redundant traffic flows.<a href="#section-abstr
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 1 April 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 6 May 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1186,7 +1191,7 @@ node (e.g., spine node) to avoid redundant traffic flows.<a href="#section-abstr
             <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-deterministic-selection-by-c" class="internal xref">Deterministic Selection by Color</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-comparison-with-rfc6754" class="internal xref">Comparison with RFC6754</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
             <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
@@ -1226,7 +1231,10 @@ node (e.g., spine node) to avoid redundant traffic flows.<a href="#section-abstr
                 <p id="section-toc.1-1.13.2.2.1"><a href="#appendix-D.2" class="auto internal xref">D.2</a>.  <a href="#name-changes-since-draft-fenner-p" class="internal xref">Changes since draft-fenner-pim-deterministic-ecmp-01</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.3">
-                <p id="section-toc.1-1.13.2.3.1"><a href="#appendix-D.3" class="auto internal xref">D.3</a>.  <a href="#name-changes-since-draft-fenner-pi" class="internal xref">Changes since draft-fenner-pim-deterministic-ecmp-02</a></p>
+                <p id="section-toc.1-1.13.2.3.1"><a href="#appendix-D.3" class="auto internal xref">D.3</a>.  <a href="#name-changes-since-draft-ietf-pi" class="internal xref">Changes since draft-ietf-pim-deterministic-ecmp-00</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.4">
+                <p id="section-toc.1-1.13.2.4.1"><a href="#appendix-D.4" class="auto internal xref">D.4</a>.  <a href="#name-changes-since-draft-ietf-pim" class="internal xref">Changes since draft-ietf-pim-deterministic-ecmp-01</a></p>
 </li>
             </ul>
 </li>
@@ -1411,24 +1419,26 @@ The Color will be 4 bytes long.<a href="#section-5.1-4" class="pilcrow">¶</a></
       <h2 id="name-deterministic-selection-by-c">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-deterministic-selection-by-c" class="section-name selfRef">Deterministic Selection by Color</a>
       </h2>
-<p id="section-6-1">TBD: If not all neighbors advertise color, do we pick from the subset
-that do, or we fall back to <a href="#routerid" class="auto internal xref">Section 4</a>?<a href="#section-6-1" class="pilcrow">¶</a></p>
-<p id="section-6-2">We use the above Hello Option to add an initial round of hashing,
+<p id="section-6-1">We use the above Hello Option to add an initial round of hashing,
 falling back to the algorithm in <a href="#RouterIdPseudocode" class="auto internal xref">Figure 1</a> to break ties.
-With this mechanism, the first round is to calculate
+The eligible RPF neighbors are reduced to those that have advertised
+a color using the above Hello option.
+The first round is to calculate
 <code>hash( S, G, color )</code> for each eligible RPF neighbor, and select
 the highest hash value among this list.  If there are multiple entries
 with the highest hash value, we re-hash among this sub-list
-with <code>viaMultipathRouterId</code> defined above.<a href="#section-6-2" class="pilcrow">¶</a></p>
+with <code>viaMultipathRouterId</code> defined above.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <span id="name-pseudocode-for-deterministic"></span><div id="ColorPseudocode">
 <figure id="figure-3">
-        <div class="alignLeft art-python art-text artwork" id="section-6-3.1">
+        <div class="alignLeft art-python art-text artwork" id="section-6-2.1">
 <pre>
 def viaMultipathColor( source, group, vias ):
     bestHash = 0
     bestVias = []
     for via in vias:
         color = getNeighborColor( via )
+        if color is None:
+            continue
         curHash = calculateHash( source, group, color )
         if curHash &gt; bestHash:
             bestVias = [ via ]
@@ -1446,12 +1456,49 @@ def viaMultipathColor( source, group, vias ):
 </div>
 </section>
 </div>
-<div id="security-considerations">
+<div id="comparison-with-rfc6754">
 <section id="section-7">
-      <h2 id="name-security-considerations">
-<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      <h2 id="name-comparison-with-rfc6754">
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-comparison-with-rfc6754" class="section-name selfRef">Comparison with RFC6754</a>
       </h2>
-<p id="section-7-1">TODO Security<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-1"><span>[<a href="#RFC6754" class="cite xref">RFC6754</a>]</span>, "ECMP Redirect", defines a mechanism that allows an upstream
+router to give an explicit RPF neighbor to a downstream, and suggest that
+the downstream start sending its Join messages to that different upstream.
+We compare the mechanism in this document with that one.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-7-2">
+        <dt id="section-7-2.1">Operation</dt>
+        <dd style="margin-left: 1.5em" id="section-7-2.2">
+          <p id="section-7-2.2.1">In ECMP Redirect, the upstream router responds to a Join or notices
+traffic flowing and makes a decision that the traffic should be taking
+a different path. With this mechanism, each downstream router makes
+a consistent decision so no correction is necessary.<a href="#section-7-2.2.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-7-2.3">Message Exchange</dt>
+        <dd style="margin-left: 1.5em" id="section-7-2.4">
+          <p id="section-7-2.4.1">In ECMP Redirect, an explicit Redirect message is sent, up to one message
+for each (S,G) for each peer. With this mechanism, the messages exchanged
+are limited to options in the Hello exchange.<a href="#section-7-2.4.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-7-2.5">Dynamic Behavior</dt>
+        <dd style="margin-left: 1.5em" id="section-7-2.6">
+          <p id="section-7-2.6.1">In ECMP Redirect, traffic flow can be disrupted by the change from one
+upstream neighbor to another. With this mechanism, the initial choice is
+stable and does not change.<a href="#section-7-2.6.1" class="pilcrow">¶</a></p>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-7-2.7">Complete Information</dt>
+        <dd style="margin-left: 1.5em" id="section-7-2.8">
+          <p id="section-7-2.8.1">In ECMP Redirect, each upstream router must have complete information
+about what upstream router is appropriate for what stream. With this
+mechanism, color information is distributed in Hello messages and does not
+require complete knowledge.
+# Security Considerations<a href="#section-7-2.8.1" class="pilcrow">¶</a></p>
+</dd>
+      <dd class="break"></dd>
+</dl>
+<p id="section-7-3">TODO Security<a href="#section-7-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana">
@@ -1523,8 +1570,12 @@ registry as shown:<a href="#section-8-1" class="pilcrow">¶</a></p>
         </h3>
 <dl class="references">
 <dt id="Jenkins-DDJ">[Jenkins-DDJ]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Jenkins, B.</span>, <span class="refTitle">"Hash Functions"</span>, <span class="seriesInfo">Dr. Dobb's Journal vol. 22, no. 9, pp. 107-109</span>, <time datetime="1997-09" class="refDate">September 1997</time>. </dd>
+<dd class="break"></dd>
+<dt id="RFC6754">[RFC6754]</dt>
+      <dd>
+<span class="refAuthor">Cai, Y.</span>, <span class="refAuthor">Wei, L.</span>, <span class="refAuthor">Ou, H.</span>, <span class="refAuthor">Arya, V.</span>, and <span class="refAuthor">S. Jethwani</span>, <span class="refTitle">"Protocol Independent Multicast Equal-Cost Multipath (ECMP) Redirect"</span>, <span class="seriesInfo">RFC 6754</span>, <span class="seriesInfo">DOI 10.17487/RFC6754</span>, <time datetime="2012-10" class="refDate">October 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc6754">https://www.rfc-editor.org/rfc/rfc6754</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -1700,17 +1751,42 @@ like Color will suffice<a href="#appendix-D.1-1.1.1" class="pilcrow">¶</a></p>
         </ul>
 </section>
 </div>
-<div id="changes-since-draft-fenner-pim-deterministic-ecmp-02">
+<div id="changes-since-draft-ietf-pim-deterministic-ecmp-00">
 <section id="appendix-D.3">
-        <h3 id="name-changes-since-draft-fenner-pi">
-<a href="#appendix-D.3" class="section-number selfRef">D.3. </a><a href="#name-changes-since-draft-fenner-pi" class="section-name selfRef">Changes since draft-fenner-pim-deterministic-ecmp-02</a>
+        <h3 id="name-changes-since-draft-ietf-pi">
+<a href="#appendix-D.3" class="section-number selfRef">D.3. </a><a href="#name-changes-since-draft-ietf-pi" class="section-name selfRef">Changes since draft-ietf-pim-deterministic-ecmp-00</a>
         </h3>
 <ul class="normal">
 <li class="normal" id="appendix-D.3-1.1">
-            <p id="appendix-D.3-1.1.1">Fixed typos in hash pseudocode.<a href="#appendix-D.3-1.1.1" class="pilcrow">¶</a></p>
+            <p id="appendix-D.3-1.1.1">Fix sample hash values<a href="#appendix-D.3-1.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="appendix-D.3-1.2">
-            <p id="appendix-D.3-1.2.1">Use python for pseudocode (it was already almost python)<a href="#appendix-D.3-1.2.1" class="pilcrow">¶</a></p>
+        </ul>
+</section>
+</div>
+<div id="changes-since-draft-ietf-pim-deterministic-ecmp-01">
+<section id="appendix-D.4">
+        <h3 id="name-changes-since-draft-ietf-pim">
+<a href="#appendix-D.4" class="section-number selfRef">D.4. </a><a href="#name-changes-since-draft-ietf-pim" class="section-name selfRef">Changes since draft-ietf-pim-deterministic-ecmp-01</a>
+        </h3>
+<ul class="normal">
+<li class="normal" id="appendix-D.4-1.1">
+            <p id="appendix-D.4-1.1.1">Fixed typos in hash pseudocode.<a href="#appendix-D.4-1.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-D.4-1.2">
+            <p id="appendix-D.4-1.2.1">Use python for pseudocode (it was already almost python)<a href="#appendix-D.4-1.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-D.4-1.3">
+            <p id="appendix-D.4-1.3.1">Update references to Jenkins hash<a href="#appendix-D.4-1.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-D.4-1.4">
+            <p id="appendix-D.4-1.4.1">Limit the eligible RPF neighbors to those that have advertised
+the color hello option<a href="#appendix-D.4-1.4.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-D.4-1.5">
+            <p id="appendix-D.4-1.5.1">Add section comparing with RFC6754<a href="#appendix-D.4-1.5.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="appendix-D.4-1.6">
+            <p id="appendix-D.4-1.6.1">Added Hooman as co-author<a href="#appendix-D.4-1.6.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
@@ -1754,6 +1830,14 @@ calculated incorrectly.<a href="#appendix-E-1" class="pilcrow">¶</a></p>
 <div class="email">
 <span>Email:</span>
 <a href="mailto:stig@cisco.com" class="email">stig@cisco.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Hooman Bidgoli</span></div>
+<div dir="auto" class="left"><span class="org">Nokia</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:hooman.bidgoli@nokia.com" class="email">hooman.bidgoli@nokia.com</a>
 </div>
 </address>
 </section>

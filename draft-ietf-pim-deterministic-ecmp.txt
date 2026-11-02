@@ -5,9 +5,11 @@
 Protocols for IP Multicast                                     B. Fenner
 Internet-Draft                                                  S. Kumar
 Intended status: Informational                     Arista Networks, Inc.
-Expires: 1 April 2027                                          S. Venaas
+Expires: 6 May 2027                                            S. Venaas
                                                      Cisco Systems, Inc.
-                                                       28 September 2026
+                                                              H. Bidgoli
+                                                                   Nokia
+                                                         2 November 2026
 
 
         Deterministic Upstream Neighbor Selection for PIM Joins
@@ -54,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 April 2027.
+   This Internet-Draft will expire on 6 May 2027.
 
 Copyright Notice
 
@@ -79,7 +81,7 @@ Table of Contents
    5.  Hello Option to Exchange Color
      5.1.  Color Hello Option Message Format
    6.  Deterministic Selection by Color
-   7.  Security Considerations
+   7.  Comparison with RFC6754
    8.  IANA Considerations
    9.  References
      9.1.  Normative References
@@ -91,7 +93,8 @@ Table of Contents
    Appendix D.  Change history
      D.1.  Changes since draft-fenner-pim-deterministic-ecmp-00
      D.2.  Changes since draft-fenner-pim-deterministic-ecmp-01
-     D.3.  Changes since draft-fenner-pim-deterministic-ecmp-02
+     D.3.  Changes since draft-ietf-pim-deterministic-ecmp-00
+     D.4.  Changes since draft-ietf-pim-deterministic-ecmp-01
    Acknowledgments
    Authors' Addresses
 
@@ -233,22 +236,22 @@ Table of Contents
 
 6.  Deterministic Selection by Color
 
-   TBD: If not all neighbors advertise color, do we pick from the subset
-   that do, or we fall back to Section 4?
-
    We use the above Hello Option to add an initial round of hashing,
-   falling back to the algorithm in Figure 1 to break ties.  With this
-   mechanism, the first round is to calculate hash( S, G, color ) for
-   each eligible RPF neighbor, and select the highest hash value among
-   this list.  If there are multiple entries with the highest hash
-   value, we re-hash among this sub-list with viaMultipathRouterId
-   defined above.
+   falling back to the algorithm in Figure 1 to break ties.  The
+   eligible RPF neighbors are reduced to those that have advertised a
+   color using the above Hello option.  The first round is to calculate
+   hash( S, G, color ) for each eligible RPF neighbor, and select the
+   highest hash value among this list.  If there are multiple entries
+   with the highest hash value, we re-hash among this sub-list with
+   viaMultipathRouterId defined above.
 
    def viaMultipathColor( source, group, vias ):
        bestHash = 0
        bestVias = []
        for via in vias:
            color = getNeighborColor( via )
+           if color is None:
+               continue
            curHash = calculateHash( source, group, color )
            if curHash > bestHash:
                bestVias = [ via ]
@@ -261,7 +264,34 @@ Table of Contents
 
        Figure 3: Pseudocode for Deterministic Hashing based on Color
 
-7.  Security Considerations
+7.  Comparison with RFC6754
+
+   [RFC6754], "ECMP Redirect", defines a mechanism that allows an
+   upstream router to give an explicit RPF neighbor to a downstream, and
+   suggest that the downstream start sending its Join messages to that
+   different upstream.  We compare the mechanism in this document with
+   that one.
+
+   Operation  In ECMP Redirect, the upstream router responds to a Join
+      or notices traffic flowing and makes a decision that the traffic
+      should be taking a different path.  With this mechanism, each
+      downstream router makes a consistent decision so no correction is
+      necessary.
+
+   Message Exchange  In ECMP Redirect, an explicit Redirect message is
+      sent, up to one message for each (S,G) for each peer.  With this
+      mechanism, the messages exchanged are limited to options in the
+      Hello exchange.
+
+   Dynamic Behavior  In ECMP Redirect, traffic flow can be disrupted by
+      the change from one upstream neighbor to another.  With this
+      mechanism, the initial choice is stable and does not change.
+
+   Complete Information  In ECMP Redirect, each upstream router must
+      have complete information about what upstream router is
+      appropriate for what stream.  With this mechanism, color
+      information is distributed in Hello messages and does not require
+      complete knowledge. # Security Considerations
 
    TODO Security
 
@@ -310,6 +340,11 @@ Table of Contents
    [Jenkins-DDJ]
               Jenkins, B., "Hash Functions", Dr. Dobb's Journal vol. 22,
               no. 9, pp. 107-109, September 1997.
+
+   [RFC6754]  Cai, Y., Wei, L., Ou, H., Arya, V., and S. Jethwani,
+              "Protocol Independent Multicast Equal-Cost Multipath
+              (ECMP) Redirect", RFC 6754, DOI 10.17487/RFC6754, October
+              2012, <https://www.rfc-editor.org/rfc/rfc6754>.
 
 Appendix A.  Arista Networks Compatibility
 
@@ -434,11 +469,24 @@ D.2.  Changes since draft-fenner-pim-deterministic-ecmp-01
 
    *  Accepted as PIM WG work item
 
-D.3.  Changes since draft-fenner-pim-deterministic-ecmp-02
+D.3.  Changes since draft-ietf-pim-deterministic-ecmp-00
+
+   *  Fix sample hash values
+
+D.4.  Changes since draft-ietf-pim-deterministic-ecmp-01
 
    *  Fixed typos in hash pseudocode.
 
    *  Use python for pseudocode (it was already almost python)
+
+   *  Update references to Jenkins hash
+
+   *  Limit the eligible RPF neighbors to those that have advertised the
+      color hello option
+
+   *  Add section comparing with RFC6754
+
+   *  Added Hooman as co-author
 
 Acknowledgments
 
@@ -461,3 +509,8 @@ Authors' Addresses
    Stig Venaas
    Cisco Systems, Inc.
    Email: stig@cisco.com
+
+
+   Hooman Bidgoli
+   Nokia
+   Email: hooman.bidgoli@nokia.com
