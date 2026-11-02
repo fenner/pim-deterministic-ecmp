@@ -436,10 +436,6 @@ This section is to be removed before publishing as an RFC.
 
 ## Changes since draft-ietf-pim-deterministic-ecmp-00
 
-- Fix sample hash values
-
-## Changes since draft-ietf-pim-deterministic-ecmp-01
-
 - Fixed typos in hash pseudocode.
 
 - Use python for pseudocode (it was already almost python)
