@@ -216,12 +216,11 @@ Color: The color value being advertised by this router.
 
 # Deterministic Selection by Color
 
-TBD: If not all neighbors advertise color, do we pick from the subset
-that do, or we fall back to {{routerid}}?
-
 We use the above Hello Option to add an initial round of hashing,
 falling back to the algorithm in {{RouterIdPseudocode}} to break ties.
-With this mechanism, the first round is to calculate
+The eligible RPF neighbors are reduced to those that have advertised
+a color using the above Hello option.
+The first round is to calculate
 `hash( S, G, color )` for each eligible RPF neighbor, and select
 the highest hash value among this list.  If there are multiple entries
 with the highest hash value, we re-hash among this sub-list
@@ -234,6 +233,8 @@ def viaMultipathColor( source, group, vias ):
     bestVias = []
     for via in vias:
         color = getNeighborColor( via )
+        if color is None:
+            continue
         curHash = calculateHash( source, group, color )
         if curHash > bestHash:
             bestVias = [ via ]
@@ -400,11 +401,20 @@ This section is to be removed before publishing as an RFC.
 
 - Accepted as PIM WG work item
 
-## Changes since draft-fenner-pim-deterministic-ecmp-02
+## Changes since draft-ietf-pim-deterministic-ecmp-00
+
+- Fix sample hash values
+
+## Changes since draft-ietf-pim-deterministic-ecmp-01
 
 - Fixed typos in hash pseudocode.
 
 - Use python for pseudocode (it was already almost python)
+
+- Update references to Jenkins hash
+
+- Limit the eligible RPF neighbors to those that have advertised
+  the color hello option
 
 # Acknowledgments
 {:numbered="false"}
