@@ -57,6 +57,7 @@ informative:
     date: 1997-09
     seriesinfo:
        "Dr. Dobb's Journal": "vol. 22, no. 9, pp. 107-109"
+  RFC6754:
 
 --- abstract
 
@@ -247,6 +248,34 @@ def viaMultipathColor( source, group, vias ):
 ~~~
 {: #ColorPseudocode title='Pseudocode for Deterministic Hashing based on Color'}
 
+# Comparison with RFC6754
+
+{{RFC6754}}, "ECMP Redirect", defines a mechanism that allows an upstream
+router to give an explicit RPF neighbor to a downstream, and suggest that
+the downstream start sending its Join messages to that different upstream.
+We compare the mechanism in this document with that one.
+
+Operation
+: In ECMP Redirect, the upstream router responds to a Join or notices
+traffic flowing and makes a decision that the traffic should be taking
+a different path. With this mechanism, each downstream router makes
+a consistent decision so no correction is necessary.
+
+Message Exchange
+: In ECMP Redirect, an explicit Redirect message is sent, up to one message
+for each (S,G) for each peer. With this mechanism, the messages exchanged
+are limited to options in the Hello exchange.
+
+Dynamic Behavior
+: In ECMP Redirect, traffic flow can be disrupted by the change from one
+upstream neighbor to another. With this mechanism, the initial choice is
+stable and does not change.
+
+Complete Information
+: In ECMP Redirect, each upstream router must have complete information
+about what upstream router is appropriate for what stream. With this
+mechanism, color information is distributed in Hello messages and does not
+require complete knowledge.
 # Security Considerations
 
 TODO Security
@@ -415,6 +444,8 @@ This section is to be removed before publishing as an RFC.
 
 - Limit the eligible RPF neighbors to those that have advertised
   the color hello option
+
+- Add section comparing with RFC6754
 
 # Acknowledgments
 {:numbered="false"}
