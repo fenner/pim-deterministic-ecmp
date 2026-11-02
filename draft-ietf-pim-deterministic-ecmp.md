@@ -38,6 +38,10 @@ author:
     fullname: "Stig Venaas"
     organization: Cisco Systems, Inc.
     email: "stig@cisco.com"
+ -
+    fullname: "Hooman Bidgoli"
+    organization: Nokia
+    email: hooman.bidgoli@nokia.com
 
 normative:
   RFC6395:
@@ -446,6 +450,8 @@ This section is to be removed before publishing as an RFC.
   the color hello option
 
 - Add section comparing with RFC6754
+
+- Added Hooman as co-author
 
 # Acknowledgments
 {:numbered="false"}
