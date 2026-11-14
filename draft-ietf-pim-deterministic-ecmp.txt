@@ -5,11 +5,11 @@
 Protocols for IP Multicast                                     B. Fenner
 Internet-Draft                                                  S. Kumar
 Intended status: Informational                     Arista Networks, Inc.
-Expires: 6 May 2027                                            S. Venaas
+Expires: 18 May 2027                                           S. Venaas
                                                      Cisco Systems, Inc.
                                                               H. Bidgoli
                                                                    Nokia
-                                                         2 November 2026
+                                                        14 November 2026
 
 
         Deterministic Upstream Neighbor Selection for PIM Joins
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 May 2027.
+   This Internet-Draft will expire on 18 May 2027.
 
 Copyright Notice
 
